@@ -1,13 +1,21 @@
 <?php
-
 $pdo = new PDO('mysql:host=localhost;port=3306;dbname=product_crud','root','');
 // it is use to check if we are now connected in the mysql if not it appear error
 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-$statement = $pdo->prepare(
+$search = $_GET["search"] ?? "";
+if($search){
+   $statement = $pdo->prepare(
+   'SELECT * FROM product WHERE title LIKE :title
+   ORDER BY create_date DESC;
+   ');
+   $statement->bindValue(":title","%$search%");
+}
+else{
+   $statement = $pdo->prepare(
    'SELECT * FROM product
    ORDER BY create_date DESC;
    ');
+}
 $statement->execute(); // execute() = execute a prepared statements
 $product = $statement->fetchAll(PDO::FETCH_ASSOC); // returns an array containing all of the result set rows
 ?>
@@ -28,14 +36,21 @@ $product = $statement->fetchAll(PDO::FETCH_ASSOC); // returns an array containin
     <h1>Product CRUD</h1>
 
    <a href="create.php" class="btn btn-success">Create Product</a>
+   <br><br>
+   <form action="">
+      <div class="input-group mb-3">
+         <input type="text" class="form-control" placeholder="Search for products" name="search">
+         <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </div>
+   </form>
 
     <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Image</th>
-      <th scope="col">Description</th>
       <th scope="col">Title</th>
+      <th scope="col">Description</th>
       <th scope="col">Price</th>
       <th scope="col">Create Date</th>
       <th scope="col">Action</th>
@@ -54,10 +69,10 @@ $product = $statement->fetchAll(PDO::FETCH_ASSOC); // returns an array containin
                <?php }?>
             </td>
             <td>
-               <?php echo $prod['description']?>
+               <?php echo $prod['title']?>
             </td>
             <td>
-               <?php echo $prod['title']?>
+               <?php echo $prod['description']?>
             </td>
             <td>
                <?php echo $prod['price']?>
