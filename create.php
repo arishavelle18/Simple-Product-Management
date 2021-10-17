@@ -78,6 +78,9 @@ $error =[];
     <title>Product CRUD</title>
   </head>
   <body>
+     <p>
+        <a href="index.php" class="btn btn-secondary">Go Back to Products</a>
+     </p>
     <h1>Create New Product</h1>
       <!-- print the error -->
       <!-- check also if it has no error -->

@@ -96,7 +96,10 @@ $error =[];
     <title>Product CRUD</title>
   </head>
   <body>
-    <h1>Create New Product</h1>
+     <p>
+        <a href="index.php" class="btn btn-secondary">Go Back to Products</a>
+     </p>
+    <h1>Update Product <?php echo $product["title"]?> </h1>
       <!-- print the error -->
       <!-- check also if it has no error -->
 
@@ -110,7 +113,10 @@ $error =[];
 
          </div>
       <?php endif;?>
-      
+      <?php if($product["image"]):?>
+      <img src="<?php echo $product["image"]?>" class="update-size">
+      <?php endif;?>
+
       <form action="" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
