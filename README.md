@@ -8,3 +8,8 @@ Test 002 :
 -Naglagay ng back button sa update at sa Create
 -maglalagay ng existing picture na meron sa id nayon
 -maglagay yung madedetermine kung ano yung inaupdate ex: Update Product Samsung
+
+
+Test 003:
+- Create search engine
+

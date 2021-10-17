@@ -3,14 +3,15 @@ $pdo = new PDO('mysql:host=localhost;port=3306;dbname=product_crud','root','');
 // it is use to check if we are now connected in the mysql if not it appear error
 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 $search = $_GET["search"] ?? "";
-if($search){
+if($search){ 
+   //this will run if you want to search something
    $statement = $pdo->prepare(
    'SELECT * FROM product WHERE title LIKE :title
    ORDER BY create_date DESC;
    ');
    $statement->bindValue(":title","%$search%");
 }
-else{
+else{ // if you are not searching anything the default is selecting all the items
    $statement = $pdo->prepare(
    'SELECT * FROM product
    ORDER BY create_date DESC;
